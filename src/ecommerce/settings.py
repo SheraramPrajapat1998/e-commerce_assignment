@@ -132,3 +132,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'dashboard'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+print(EMAIL_HOST_USER)
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+print(EMAIL_HOST_PASSWORD)
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
