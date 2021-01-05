@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # local apps
     'account.apps.AccountConfig',
     'shop.apps.ShopConfig',
+    'cart.apps.CartConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -153,3 +154,5 @@ AUTHENTICATION_BACKENDS = [
     # authentication using email
     'account.authentication.EmailAuthBackend',
 ]
+
+CART_SESSION_ID = 'cart'
