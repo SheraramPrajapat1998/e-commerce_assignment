@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from .models import OrderItem
 from .forms import OrderCreateForm
+from .mail import order_created
 
 from cart.cart import Cart
 
@@ -19,6 +20,8 @@ def order_create(request):
 
       # clear the cart
       cart.clear()
+      # send mail
+      order_created(order.id)
       return render(request, 'orders/order/created.html', {'order': order})
   else:
     form = OrderCreateForm()
