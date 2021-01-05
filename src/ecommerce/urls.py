@@ -25,6 +25,6 @@ urlpatterns = [
 if settings.DEBUG:
     from django.conf.urls.static import static
     urlpatterns += static(settings.MEDIA_URL,
-                          document__root=settings.MEDIA_ROOT)
+                          document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL,
-                          document__root=settings.STATIC_ROOT)
+                          document_root=settings.STATIC_ROOT)
