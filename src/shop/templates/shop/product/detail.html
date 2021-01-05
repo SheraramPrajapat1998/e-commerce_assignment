@@ -1,20 +1,25 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %}
   {{ product.name }}
 {% endblock title %}
 
 {% block content %}
-  <div class="product-detail">
-    <img src="{% if product.image %}{{ product.image.url }}{% endif %}">
-    <h1>{{ product.name }}</h1>
-    <h2>
-      <a href="{{ product.category.get_absolute_url }}">
-        {{ product.category }}
-      </a>
-    </h2>
-    <p class="price">${{ product.price }}</p>
-    {{ product.description|linebreaks }}
+  <div class="row">
+    <div class="col-xs-12 col-lg-4">
+      <img src="{{ product.image.url }}" class="img-thumbnail rounded">
     </div>
+    <div class="col-xs-12 col-lg-8">
+      <h1 class="text-capitalize">{{ product.name }}</h1>
+      <h2>
+        <a href="{{ product.category.get_absolute_url }}">
+          {{ product.category }}
+        </a>
+      </h2>
+      <h4 class="mb-2"> <strong>${{ product.price }}</strong></h4>
+      <p>
+        {{ product.description|linebreaks }}
+      </p>
+    </div>
+  </div>
   {% endblock content %}

@@ -137,7 +137,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn', 'media_root')
 
 # login, logout settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'shop:product_list'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
