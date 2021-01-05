@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # local apps
     'account.apps.AccountConfig',
-
+    'shop.apps.ShopConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -147,3 +147,9 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # authentication using email
+    'account.authentication.EmailAuthBackend',
+]
