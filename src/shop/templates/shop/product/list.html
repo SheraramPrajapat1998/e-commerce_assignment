@@ -36,7 +36,7 @@
             <div class="card-body">
               <h5 class="card-title text-capitalize">{{ product.name }}</h5>
               <p class="card-text">{{ product.description|truncatewords:20|linebreaks }}</p>
-              <a href="#" class="btn btn-outline-success">View</a>
+              <a href="{{ product.get_absolute_url }}" class="btn btn-outline-success">View</a>
               <h4 class="float-right">${{ product.price }}</h4>
             </div>
           </div>
