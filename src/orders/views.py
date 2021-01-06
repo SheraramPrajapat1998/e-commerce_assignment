@@ -1,8 +1,8 @@
 from cart.cart import Cart
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render
-
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from .forms import OrderCreateForm
 from .mail import order_created
 from .models import Order, OrderItem
@@ -33,7 +33,12 @@ def order_create(request):
       cart.clear()
       # send mail
       order_created(order.id)
-      return render(request, 'orders/order/created.html', {'order': order})
+      
+      # set the order in the session
+      request.session['order_id'] = order.id
+      # redirect for payment
+      return redirect(reverse('payment:process'))
+      # return render(request, 'orders/order/created.html', {'order': order})
   else:
     form = OrderCreateForm()
   return render(request, 'orders/order/create.html', {'cart': cart, 'form': form})

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import braintree
 from pathlib import Path
 import os
 
@@ -165,3 +166,15 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 CART_SESSION_ID = 'cart'
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID   = os.environ.get('BRAINTREE_MERCHANT_ID')  # Merchant ID
+BRAINTREE_PUBLIC_KEY    = os.environ.get('BRAINTREE_PUBLIC_KEY')  # Public Key
+BRAINTREE_PRIVATE_KEY   = os.environ.get('BRAINTREE_PRIVATE_KEY')  # Private key
+print(BRAINTREE_PUBLIC_KEY)
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
