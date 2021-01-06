@@ -1,8 +1,12 @@
+from decimal import Decimal
+
+from coupons.models import Coupon
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django_countries.fields import CountryField
 from shop.models import Product
 
-from django_countries.fields import CountryField
 
 class Order(models.Model):
   user        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='orders')
@@ -17,6 +21,9 @@ class Order(models.Model):
   paid        = models.BooleanField(default=False)
   country     = CountryField()
 
+  coupon = models.ForeignKey(Coupon, related_name='orders', null=True, blank=True, on_delete=models.SET_NULL)
+  discount = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+  
   class Meta:
     ordering = ('-created', )
   
@@ -24,7 +31,8 @@ class Order(models.Model):
     return f'Order {self.id} user -- {self.first_name} {self.last_name}'
   
   def get_total_cost(self):
-    return sum(item.get_cost() for item in self.items.all())
+    total_cost = sum(item.get_cost() for item in self.items.all())
+    return total_cost - total_cost * (self.discount / Decimal(100))
 
 
 class OrderItem(models.Model):
