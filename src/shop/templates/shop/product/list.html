@@ -11,7 +11,7 @@
 
 {% block content %}
   <div class="row mt-2">
-    <div id="sidebar" class="col-3">
+    <div id="sidebar" class="col-sm-4 col-md-2 col-lg-2 text-center">
       <h4 class="text-center">Categories</h3>
       <ul class="list-group">
         <li class="list-group-item {% if not category %} active {% endif %}">
@@ -25,21 +25,24 @@
         {% endfor %}
       </ul>
     </div>
-    <div id="main" class="product-list col-9">
+    <div id="main" class="product-list col-sm-8 col-md-10">
       <h1 class="text-center">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
       <div class="row ">
         {% for product in products %}
-          <div class="card" style="width: 18rem;">
+        <div class="col-sm-12 col-md-6 col-xl-4">
+          <div class="card mb-4 mx-auto" style="width: 18rem;">
             <a href="{{ product.get_absolute_url }}">              
-              <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+              <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" >
             </a>
             <div class="card-body">
               <h5 class="card-title text-capitalize">{{ product.name }}</h5>
-              <p class="card-text">{{ product.description|truncatewords:20|linebreaks }}</p>
+              <hr>
+              <p class="text-justify">{{ product.description|truncatewords:20|linebreaks }}</p>
               <a href="{{ product.get_absolute_url }}" class="btn btn-outline-success">View</a>
               <h4 class="float-right">${{ product.price }}</h4>
             </div>
           </div>
+        </div>
         {% endfor %}
       </div>
     </div>
