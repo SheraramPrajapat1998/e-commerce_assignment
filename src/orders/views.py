@@ -55,5 +55,8 @@ def admin_order_pdf(request, order_id):
 @login_required
 def myorders(request):
   orders = Order.objects.filter(user=request.user)
-  print(orders)
-  return render(request, 'orders/order/myorders.html', {'orders':orders})
+  # if request.user.is_superuser:
+  #   allorders = Order.objects.all()
+  #   return render(request, 'orders/order/myorders.html', {'orders': orders, 'allorders': allorders})
+  return render(request, 'orders/order/myorders.html', {'orders': orders})
+  
