@@ -1,5 +1,6 @@
 from cart.cart import Cart
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 
 from .forms import OrderCreateForm
@@ -16,6 +17,7 @@ def order_create(request):
   if request.method == 'POST':
     form = OrderCreateForm(data=request.POST)
     if form.is_valid():
+      form.instance.user = request.user
       order = form.save()
       for item in cart:
         OrderItem.objects.create(order=order,
@@ -49,3 +51,9 @@ def admin_order_pdf(request, order_id):
                                           stylesheets=[weasyprint.CSS(
                                               settings.STATIC_ROOT + '/css/pdf.css')])
   return response
+
+@login_required
+def myorders(request):
+  orders = Order.objects.filter(user=request.user)
+  print(orders)
+  return render(request, 'orders/order/myorders.html', {'orders':orders})

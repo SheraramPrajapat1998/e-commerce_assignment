@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}
   Checkout
@@ -13,6 +14,8 @@
         <div class="form-group">
           <form method="post" class="order-form">
             {{ form|crispy }}
+            <!-- <i class="{{ country.flag_css }}"></i> -->
+            <!-- <link rel="stylesheet" href="{% static 'flags/sprite.css' %}"> -->
             {% csrf_token %}
             
             {% if cart|length > 0 %}

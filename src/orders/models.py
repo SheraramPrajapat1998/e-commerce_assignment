@@ -1,8 +1,11 @@
+from django.conf import settings
 from django.db import models
 from shop.models import Product
 
+from django_countries.fields import CountryField
 
 class Order(models.Model):
+  user        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='orders')
   first_name  = models.CharField(max_length=50)
   last_name   = models.CharField(max_length=50)
   email       = models.EmailField()
@@ -12,6 +15,7 @@ class Order(models.Model):
   created     = models.DateTimeField(auto_now_add=True)
   updated     = models.DateTimeField(auto_now=True)
   paid        = models.BooleanField(default=False)
+  country     = CountryField()
 
   class Meta:
     ordering = ('-created', )
