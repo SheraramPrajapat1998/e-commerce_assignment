@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'coupons.apps.CouponsConfig',
+    'payment.apps.PaymentConfig',
 
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,6 +50,9 @@ INSTALLED_APPS = [
     # third party apps
     'crispy_forms',
     'django_countries',
+    'user_visit',
+    'django_adminstats.apps.AdminConfig',  # replaces django.contrib.admin
+    'django_adminstats',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'user_visit.middleware.UserVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
