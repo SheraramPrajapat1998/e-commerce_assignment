@@ -158,7 +158,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-print(EMAIL_HOST_USER)
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     # authentication using email
@@ -171,7 +171,7 @@ CART_SESSION_ID = 'cart'
 BRAINTREE_MERCHANT_ID   = os.environ.get('BRAINTREE_MERCHANT_ID')  # Merchant ID
 BRAINTREE_PUBLIC_KEY    = os.environ.get('BRAINTREE_PUBLIC_KEY')  # Public Key
 BRAINTREE_PRIVATE_KEY   = os.environ.get('BRAINTREE_PRIVATE_KEY')  # Private key
-print(BRAINTREE_MERCHANT_ID)
+
 BRAINTREE_CONF = braintree.Configuration(
     braintree.Environment.Sandbox,
     BRAINTREE_MERCHANT_ID,
